@@ -32,19 +32,18 @@ public class GenericDAOImpl<T, K> implements GenericDAO<T, K> {
 	}
 
 	public T buscar(K chave) {
-		return em.find(clazz, chave);
+		return (em.find(clazz, chave));
 	}
 	
 	public void remover(K chave) throws Exception {
-		T entidade= buscar(chave);
-		if(entidade== null) {
-			throw new Exception("Entidade não encontrada");
+		T entidade = buscar(chave);
+		if(entidade == null) {
+			throw (new Exception("Entidade não encontrada"));
 		}
 		em.remove(entidade);
 	}
 	
 	public List<T> listar(){
-		return em.createQuery("from      "+ clazz.getName(),clazz).getResultList();
+		return (em.createQuery("from      "+ clazz.getName(),clazz).getResultList());
 	}
-
 }

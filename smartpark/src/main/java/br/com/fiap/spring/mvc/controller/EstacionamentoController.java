@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.fiap.spring.mvc.dao.EstacionamentoDAO;
 import br.com.fiap.spring.mvc.entity.Estacionamento;
 
-
 /*
  * A notação "@Autowired" serve para SpringMVC colocar automaticamente
  * um objeto do tipo "EstacionamentoDAO dao" na variável.
@@ -48,7 +47,7 @@ public class EstacionamentoController {
 
 	@GetMapping("cadastrar")
 	public String abrirForm(Estacionamento estacionamento) {
-		return "estacionamento/cadastro";
+		return ("estacionamento/cadastro");
 	}
 
 	@Transactional
@@ -58,20 +57,20 @@ public class EstacionamentoController {
 			dao.cadastrar(estacionamento);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ModelAndView("estacionamento/cadastro");
+			return (new ModelAndView("estacionamento/cadastro"));
 		}
 		attr.addFlashAttribute("msg", "Cadastrado com sucesso!");
-		return new ModelAndView("redirect:/estacionamento/cadastrar");	
+		return (new ModelAndView("redirect:/estacionamento/cadastrar"));	
 	}
 
 	@GetMapping("listar")
 	public ModelAndView listar() {
-		return new ModelAndView("estacionamento/lista").addObject("lista", dao.listar());
+		return (new ModelAndView("estacionamento/lista").addObject("lista", dao.listar()));
 	}
 
 	@GetMapping("editar/{id}")
 	public ModelAndView abrirFormEdicao(@PathVariable("id") int codigo) {
-		return new ModelAndView("estacionamento/edicao").addObject("estacionamento", dao.buscar(codigo));
+		return (new ModelAndView("estacionamento/edicao").addObject("estacionamento", dao.buscar(codigo)));
 	}
 
 	@Transactional
@@ -82,11 +81,11 @@ public class EstacionamentoController {
 			dao.atualizar(estacionamento);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ModelAndView("redirect:/estacionamento/edicao")
-					.addObject("msg", "Falha ao atualizar!");
+			return (new ModelAndView("redirect:/estacionamento/edicao")
+					.addObject("msg", "Falha ao atualizar!"));
 		}
 		attr.addFlashAttribute("msg", "Atualizado com sucesso!");
-		return new ModelAndView("redirect:/estacionamento/listar");
+		return (new ModelAndView("redirect:/estacionamento/listar"));
 	}
 	
 	@Transactional
@@ -96,11 +95,10 @@ public class EstacionamentoController {
 			dao.remover(codigo);	
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ModelAndView("estacionamento/lista").addObject("msg", "Erro ao excluir!");
+			return (new ModelAndView("estacionamento/lista").addObject("msg", "Erro ao excluir!"));
 		}
 		attr.addFlashAttribute("msg", "Excluido com sucesso!");
-		return new ModelAndView("redirect:/estacionamento/listar");
+		return (new ModelAndView("redirect:/estacionamento/listar"));
 		
 	}
-
 }

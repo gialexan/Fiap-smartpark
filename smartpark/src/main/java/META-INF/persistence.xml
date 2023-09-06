@@ -13,4 +13,4 @@
 			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
 		</properties>
 	</persistence-unit>
-	</persistence>
+</persistence>

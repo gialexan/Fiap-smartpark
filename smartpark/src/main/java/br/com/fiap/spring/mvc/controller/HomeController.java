@@ -13,11 +13,11 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String index() {
-		return "/home/index";
+		return ("/home/index");
 	}
 	
 	@GetMapping("contato")
 	public String contanto() {
-		return "/home/contato";
+		return ("/home/contato");
 	}
 }

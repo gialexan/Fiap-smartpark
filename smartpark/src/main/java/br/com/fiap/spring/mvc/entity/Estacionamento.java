@@ -32,7 +32,6 @@ public class Estacionamento {
 	
 	public Estacionamento() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Estacionamento(int codigo, String nome, String endereco, int vagas, float preco) {
