@@ -1,0 +1,67 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+	<!--Renponsável identificar classes controladoras. -->
+	<context:component-scan
+		base-package="br.com.fiap.spring.mvc.controller,br.com.fiap.spring.mvc.dao"
+	/>
+	<!--Responsável por habilitar uso de anotações. -->
+	<mvc:annotation-driven/>
+	<!--Bean Renponsável identificar as View/Páginas/Telas. -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<!--Extenções utilizadas. -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!--A partir daqui é o back-end. -->
+	<!--Bean Renponsável por obter EntityManager/entityManagerFactory que são utilizados para obter conexão com Banco de Dados . -->
+	<bean 
+		id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="smartcities" />
+		<property name="dataSource" ref="oracleDataSource" />
+		<property name="jpaVendorAdapter">
+			<bean
+				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+			/>
+		</property>
+	</bean>
+	<!--Bean Renponsável pela configuração do Banco de Dados. -->
+	<bean 
+		id="oracleDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl" />
+		<property name="username" value="RM94443" />
+		<property name="password" value="281298" />
+	</bean>
+	
+	<!--Transações -->
+	<!--Bean responsável por habilitar e desabilitar automaticame commits/roolback -->
+	<bean
+		id="transactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!--Não permitir que arquivos de  css, js, img passem pela servelet-->
+	<mvc:default-servlet-handler/>
+	
+</beans>
+	
+	
+	
+		
+	
