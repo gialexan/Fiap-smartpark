@@ -1,6 +1,6 @@
 # Smartpark
 
-Desenvolvimento interfaces web
+Desenvolvimento de interfaces web
 
 ### Sobre o projeto
 
